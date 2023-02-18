@@ -29,7 +29,10 @@ public class Blog {
 
     @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
     List<Image> imageList=new ArrayList<>();
-    public Blog() {
+    public Blog(User user, String title, String content) {
+        this.title = title;
+        this.content = content;
+        this.user = user;
     }
 
     public Blog(String title, String content) {
