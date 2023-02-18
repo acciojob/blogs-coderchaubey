@@ -27,9 +27,8 @@ public class BlogService {
         blog.setPubDate(new Date());
         User originalUser=userRepository1.findById(userId).get();
         blog.setUser(originalUser);
-        List<Blog> blogList=originalUser.getBlogList();
-        blogList.add(blog);
-        originalUser.setBlogList(blogList);
+        originalUser.getBlogList().add(blog);
+
         userRepository1.save(originalUser);
 
         return blog;

@@ -14,24 +14,23 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity createUser(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<Void> createUser(@RequestParam String username, @RequestParam String password) {
         // create a new user with given username and password
-        return new ResponseEntity<>(userService.createUser(username,password)
-,HttpStatus.CREATED);
+        userService.createUser(username,password);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{userId}")
-    public ResponseEntity deleteUser(@PathVariable int userId) {
+    public ResponseEntity<Void> deleteUser(@PathVariable int userId) {
         // delete user using deleteById
         userService.deleteUser(userId);
-        return new ResponseEntity<>("Deleted Successfully",
-        HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity updateUser(@RequestParam Integer id, @RequestParam String password) {
+    public ResponseEntity<Void> updateUser(@RequestParam Integer id, @RequestParam String password) {
         // update password of given user
         userService.updateUser(id,password);
-        return new ResponseEntity<>("Updated Successfully",HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
